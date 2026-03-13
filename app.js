@@ -8,7 +8,10 @@ const dificult = document.querySelector("#dificulté");
 const pourcentagejust = document.querySelector("#pourcentagejuste");
 const conteur = document.querySelector("#conteur");
 const nombredemote = document.querySelector("#nombredemote");
-const Restarte = document.querySelector("#Restarte")
+const Restarte = document.querySelector("#Restarte");
+const Restartebutton = document.querySelector("#Restartebutton");
+const base = document.querySelector("#base");
+const index =document.querySelector("#index")
 
 let hards = false;
 let easys = false;
@@ -274,6 +277,12 @@ function créétliste(te, numéro) {
 			}
 			a++;
 		}
+
+		Restartebutton.addEventListener("click", () => {
+			a = 0;
+			p.classList.remove("faux");
+			p.classList.remove("vrait");
+		});
 	});
 	dificult.addEventListener("click", () => {
 		p.remove();
@@ -318,8 +327,17 @@ dificult.addEventListener("click", () => {
 		}
 	}
 });
-function finitt() {}
+function finitt() {
+	if ((premierfoix = true)) {
+		premierfoix = false;
+		index.classList.add("none")
+		base.classList.remove("none");
+		
+	}
+}
+let premierfoix = true;
 start.addEventListener("click", () => {
+	Restarte.classList.remove("none");
 	dialog.close();
 	textarea.removeAttribute("maxlength");
 	starte = true;
@@ -327,13 +345,12 @@ start.addEventListener("click", () => {
 	temp = setInterval(() => {
 		temps--;
 		conteur.textContent = "0:" + temps;
-		if (temps == 0) {
+		if (temps == 55) {
 			finitt();
 			clearInterval(temp);
 		}
 	}, 1000);
 });
-
 
 document.addEventListener("keydown", (event) => {
 	let pourcentagejuste = 100;
@@ -342,4 +359,23 @@ document.addEventListener("keydown", (event) => {
 		pourcentagejuste = Math.floor(pourcentagejuste);
 		pourcentagejust.textContent = pourcentagejuste + "%";
 	}
+});
+Restartebutton.addEventListener("click", () => {
+	pourcentagejuste = 100;
+	pourcentagejust.textContent = pourcentagejuste + "%";
+	faute = 0;
+	vrait + 0;
+	nombredemot = 0;
+	nombredemote.textContent = nombredemot;
+	clearInterval(temp);
+	temps = 60;
+	conteur.textContent = "1:00";
+	temp = setInterval(() => {
+		temps--;
+		conteur.textContent = "0:" + temps;
+		if (temps == 0) {
+			finitt();
+			clearInterval(temp);
+		}
+	}, 1000);
 });
