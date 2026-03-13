@@ -1,6 +1,5 @@
 body {
 	background: var(--colors-neutral-900, #121212);
-	height: 100vh;
 	padding: 20px 80px;
 }
 h1,
@@ -66,7 +65,6 @@ dialog {
 	border: none;
 }
 
-
 .none {
 	display: none;
 }
@@ -75,6 +73,16 @@ dialog {
 	box-shadow:
 		0px 0px 0px 32px #4dd67b1a,
 		0px 0px 0px 16px #4dd67b33;
+}
+.restarteste {
+	background: var(--colors-neutral-800, #262626);
+	padding: 10px;
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	border: none;
+	border-radius: 5px;
+	margin: auto;
 }
 .boxi {
 	width: 100%;
@@ -85,14 +93,37 @@ dialog {
 	text-align: center;
 }
 .textarea {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
 	width: 100%;
 	background-color: transparent;
 	border: none;
-	height: 30rem;
+}
+.flou {
 	font-size: 20px;
+	color: transparent;
+	text-shadow: 0 0 8px #ffffff;
+}
+.p {
+	opacity: 0.75;
+}
+.epace {
+	margin: 10px;
+}
+.vrait {
+	color: green;
+}
+.faux {
+	color: red;
+	text-decoration: line-through;
 }
 .Complete {
 	margin-top: 40px;
+}
+p {
+	height: max-content;
 }
 .bar {
 	display: grid;

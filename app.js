@@ -5,6 +5,10 @@ const start = document.querySelector("#start");
 const dialog = document.querySelector("dialog");
 const textarea = document.querySelector("#textarea");
 const dificult = document.querySelector("#dificulté");
+const pourcentagejust = document.querySelector("#pourcentagejuste");
+const conteur = document.querySelector("#conteur");
+const nombredemote = document.querySelector("#nombredemote");
+const Restarte = document.querySelector("#Restarte")
 
 let hards = false;
 let easys = false;
@@ -23,7 +27,6 @@ let moteasys = [
 	"mur",
 	"main",
 	"pied",
-	"tête",
 	"nez",
 	"yeux",
 	"bras",
@@ -194,6 +197,7 @@ let mothard = [
 	"corrélation",
 	"causalité",
 ];
+let starte = false;
 dialog.show();
 easy.addEventListener("click", () => {
 	easy.classList.remove("dificult");
@@ -228,6 +232,60 @@ hard.addEventListener("click", () => {
 	easys = false;
 	mediums = false;
 });
+let faute = 0;
+let vrait = 0;
+let nombredemot = 0;
+function créétliste(te, numéro) {
+	const p = document.createElement("p");
+	p.textContent = te;
+	let a = 0;
+	if (te == " ") {
+		p.classList.add("epace");
+	} else {
+		p.classList.add("flou");
+	}
+
+	textarea.appendChild(p);
+	start.addEventListener("click", () => {
+		p.classList.remove("flou");
+		p.classList.add("p");
+	});
+
+	document.addEventListener("keydown", (event) => {
+		if (starte == true) {
+			const nomTouche = event.key;
+			if (nomTouche == te && numéro >= a) {
+				if (numéro == a) {
+					console.log(true);
+					p.classList.add("vrait");
+					vrait++;
+				}
+			} else {
+				if (numéro == a) {
+					console.log(true);
+					p.classList.add("faux");
+					faute++;
+					console.log(faute);
+				}
+			}
+			if (nomTouche == " " && nomTouche == te && numéro == a) {
+				nombredemot++;
+				nombredemote.textContent = nombredemot;
+			}
+			a++;
+		}
+	});
+	dificult.addEventListener("click", () => {
+		p.remove();
+	});
+}
+let text = "";
+for (let i = 0; i <= 80; i++) {
+	text += moteasys[Math.floor(Math.random() * (moteasys.length - 0) + 0)] + " ";
+}
+for (let e = 0; e < text.length; e++) {
+	const pp = créétliste(text[e], e);
+}
 dificult.addEventListener("click", () => {
 	if (easys == true) {
 		let text = "";
@@ -235,7 +293,9 @@ dificult.addEventListener("click", () => {
 			text +=
 				moteasys[Math.floor(Math.random() * (moteasys.length - 0) + 0)] + " ";
 		}
-		textarea.setAttribute("placeholder", text);
+		for (let e = 0; e < text.length; e++) {
+			const pp = créétliste(text[e], e);
+		}
 	}
 	if (mediums == true) {
 		let text = "";
@@ -243,7 +303,9 @@ dificult.addEventListener("click", () => {
 			text +=
 				motmedium[Math.floor(Math.random() * (motmedium.length - 0) + 0)] + " ";
 		}
-		textarea.setAttribute("placeholder", text);
+		for (let e = 0; e < text.length; e++) {
+			const pp = créétliste(text[e], e);
+		}
 	}
 	if (hards == true) {
 		let text = "";
@@ -251,10 +313,33 @@ dificult.addEventListener("click", () => {
 			text +=
 				mothard[Math.floor(Math.random() * (mothard.length - 0) + 0)] + " ";
 		}
-		textarea.setAttribute("placeholder", text);
+		for (let e = 0; e < text.length; e++) {
+			const pp = créétliste(text[e], e);
+		}
 	}
 });
+function finitt() {}
 start.addEventListener("click", () => {
 	dialog.close();
-	textarea.removeAttribute("maxlength")
+	textarea.removeAttribute("maxlength");
+	starte = true;
+	let temps = 60;
+	temp = setInterval(() => {
+		temps--;
+		conteur.textContent = "0:" + temps;
+		if (temps == 0) {
+			finitt();
+			clearInterval(temp);
+		}
+	}, 1000);
+});
+
+
+document.addEventListener("keydown", (event) => {
+	let pourcentagejuste = 100;
+	if (starte == true && faute != 0) {
+		pourcentagejuste -= (faute * 100) / text.length;
+		pourcentagejuste = Math.floor(pourcentagejuste);
+		pourcentagejust.textContent = pourcentagejuste + "%";
+	}
 });
